@@ -20,13 +20,13 @@ export default function About() {
             of blockchain technology.
           </p>
           <div className="text-center">
-            <a
-              href="https://docs.google.com/document/d/1sYTG9l5H1V9MJJ7ccLP0l-ZMokXRTIetOm1Qd59jZeM/edit?usp=sharing"
-              download
-              className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          <a
+            href="/assets/resume-JR.pdf"
+            download
+            className="inline-flex items-center px-6 py-3 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
             >
-              <FileDown className="w-5 h-5 mr-2" />
-              Download CV
+            <FileDown className="w-5 h-5 mr-2" />
+            Download CV
             </a>
           </div>
         </div>
