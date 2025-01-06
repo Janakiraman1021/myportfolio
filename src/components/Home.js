@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { useIntersectionObserver } from '../hooks/useIntersectionObserver';
+import { useIntersectionObserver } from './hooks/useIntersectionObserver';
 
 export default function Home() {
   const typewriterRef = useRef(null);
@@ -79,7 +79,7 @@ export default function Home() {
             <div className="relative animate-float">
               <div className="absolute inset-0 bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark rounded-full blur-3xl opacity-20"></div>
               <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?fit=crop&w=800&q=80"
+                src="https://jr-portfolio-gilt.vercel.app/static/media/HeroImage.f20a12b26731c4549fbc.jpg"
                 alt="Janakiraman"
                 className="relative rounded-full w-72 h-72 object-cover mx-auto border-4 border-white dark:border-gray-800 shadow-lg"
               />

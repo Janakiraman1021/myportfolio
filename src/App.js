@@ -10,7 +10,7 @@ import Internships from './components/Internships/Internships';
 import Achievements from './components/Achievements/Achievements';
 import '@fortawesome/fontawesome-free/css/all.min.css';
 import Footer from './components/Footer';
-import { HobbiesSection } from './components/Hobbies/Hobbies';
+
 
 function App() {
   const [darkMode, setDarkMode] = useState(() => {
@@ -42,7 +42,6 @@ function App() {
       <Certifications />
       <Internships />
       <Achievements />
-      
       <Footer />
     </div>
   );
@@ -50,4 +49,3 @@ function App() {
 
 export default App;
 
-  
