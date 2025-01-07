@@ -9,7 +9,9 @@ import Certifications from './components/Certifications/Certifications';
 import Internships from './components/Internships/Internships';
 import Achievements from './components/Achievements/Achievements';
 import '@fortawesome/fontawesome-free/css/all.min.css';
-import Footer from './components/Footer';
+import Contact from './components/Contact';
+import Hobbies from './components/Hobbies';
+import Books from './components/Books';
 
 
 function App() {
@@ -42,7 +44,9 @@ function App() {
       <Certifications />
       <Internships />
       <Achievements />
-      <Footer />
+      <Books />
+      <Hobbies />
+      <Contact />
     </div>
   );
 }

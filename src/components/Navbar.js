@@ -3,7 +3,7 @@ import { Menu, X, Moon, Sun } from 'lucide-react';
 
 const navItems = [
   'Home', 'About', 'Education', 'Skills', 'Projects',
-  'Certifications', 'Internships', 'Achievements',  'Contact',
+  'Certifications', 'Internships', 'Books','Achievements',  'Contact',
 ];
 
 export default function Navbar({ darkMode, toggleDarkMode }) {

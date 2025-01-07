@@ -5,20 +5,52 @@ const certificationsData = [
   {
     title: 'Fullstack Web Development',
     issuer: 'NIIT Sudharsanam IT Academy',
-    date: 'January 2023',
-    credentialUrl: 'https://credential.url/fullstack'
+    date: 'January 2023'
   },
   {
     title: 'Advanced Python Programming',
     issuer: 'CSC',
-    date: 'March 2023',
-    credentialUrl: 'https://credential.url/python'
+    date: 'March 2023'
   },
   {
     title: 'Programming in C++',
     issuer: 'CSC',
-    date: 'June 2023',
-    credentialUrl: 'https://credential.url/cpp'
+    date: 'June 2023'
+  },
+  {
+    title: 'Author of the Book : என் இதயத்தின் ஓசை',
+    issuer: 'JEC Publication',
+    date: 'June 2024'
+  },
+  {
+    title: 'Co-Author of the Book : மழலையும் நானும்',
+    issuer: 'Yappu Publication',
+    date: 'June 2024'
+  },
+  {
+    title: 'Co-Author of the Book : விரும்பிய வரிகள்',
+    issuer: 'Yappu Publication',
+    date: 'June 2024'
+  },
+  {
+    title: 'Co-Author of the Book : வினோத உலகம்',
+    issuer: 'Yappu Publication',
+    date: 'June 2024'
+  },
+  {
+    title: 'Co-Author of the Book : எனது அபிமானி',
+    issuer: 'JEC Publication',
+    date: 'June 2024'
+  },
+  {
+    title: 'Co-Author of the Book : என் அழகிய தேவதை',
+    issuer: 'JEC  Publication',
+    date: 'June 2024'
+  },
+  {
+    title: 'Co-Author of the Book : முகமரிய காதல்',
+    issuer: 'Yappu Publication',
+    date: 'June 2024'
   }
 ];
 
