@@ -5,7 +5,7 @@ const mainBook = {
   title: 'என் இதயத்தின் ஓசை',
   titleEnglish: 'En Idhayathin Osai',
   author: 'Janakiraman',
-  publicationYear: '2023',
+  publicationYear: '2024',
   publisher: 'JEC Publication',
   isbn: '9789361759345',
   synopsis: 'A heartfelt collection of Tamil poetry exploring themes of love, technology, and modern life. The verses blend traditional Tamil poetic forms with contemporary perspectives on blockchain and digital innovation.',
