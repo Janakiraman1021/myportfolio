@@ -31,7 +31,50 @@ const achievementsData = [
     organization: 'College Tech Fest',
     date: 'March 2023',
     description: 'Awarded for outstanding project on blockchain-based KYC verification system.'
+  },
+  {
+    title: 'Author of the Book: என் இதயத்தின் ஓசை',
+    organization: 'JEC Publication',
+    date: 'June 2024',
+    description: 'Published the book titled "என் இதயத்தின் ஓசை," showcasing creative and heartfelt literary work.'
+  },
+  {
+    title: 'Co-Author of the Book: மழலையும் நானும்',
+    organization: 'Yappu Publication',
+    date: 'June 2024',
+    description: 'Contributed as a co-author to the book "மழலையும் நானும்," exploring inspiring themes and narratives.'
+  },
+  {
+    title: 'Co-Author of the Book: விரும்பிய வரிகள்',
+    organization: 'Yappu Publication',
+    date: 'June 2024',
+    description: 'Collaborated as a co-author for the book "விரும்பிய வரிகள்," presenting memorable and evocative writings.'
+  },
+  {
+    title: 'Co-Author of the Book: வினோத உலகம்',
+    organization: 'Yappu Publication',
+    date: 'June 2024',
+    description: 'Co-authored the book "வினோத உலகம்," bringing imaginative and thought-provoking content to readers.'
+  },
+  {
+    title: 'Co-Author of the Book: எனது அபிமானி',
+    organization: 'JEC Publication',
+    date: 'June 2024',
+    description: 'Participated as a co-author in the book "எனது அபிமானி," contributing unique perspectives and stories.'
+  },
+  {
+    title: 'Co-Author of the Book: என் அழகிய தேவதை',
+    organization: 'JEC Publication',
+    date: 'June 2024',
+    description: 'Contributed as a co-author to "என் அழகிய தேவதை," reflecting on beautiful and emotional narratives.'
+  },
+  {
+    title: 'Co-Author of the Book: முகமரிய காதல்',
+    organization: 'Yappu Publication',
+    date: 'June 2024',
+    description: 'Collaborated on the book "முகமரிய காதல்," offering compelling and heartfelt storytelling as a co-author.'
   }
+  
 ];
 
 export default function Achievements() {

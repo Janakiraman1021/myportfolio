@@ -16,41 +16,6 @@ const certificationsData = [
     title: 'Programming in C++',
     issuer: 'CSC',
     date: 'June 2023'
-  },
-  {
-    title: 'Author of the Book : என் இதயத்தின் ஓசை',
-    issuer: 'JEC Publication',
-    date: 'June 2024'
-  },
-  {
-    title: 'Co-Author of the Book : மழலையும் நானும்',
-    issuer: 'Yappu Publication',
-    date: 'June 2024'
-  },
-  {
-    title: 'Co-Author of the Book : விரும்பிய வரிகள்',
-    issuer: 'Yappu Publication',
-    date: 'June 2024'
-  },
-  {
-    title: 'Co-Author of the Book : வினோத உலகம்',
-    issuer: 'Yappu Publication',
-    date: 'June 2024'
-  },
-  {
-    title: 'Co-Author of the Book : எனது அபிமானி',
-    issuer: 'JEC Publication',
-    date: 'June 2024'
-  },
-  {
-    title: 'Co-Author of the Book : என் அழகிய தேவதை',
-    issuer: 'JEC  Publication',
-    date: 'June 2024'
-  },
-  {
-    title: 'Co-Author of the Book : முகமரிய காதல்',
-    issuer: 'Yappu Publication',
-    date: 'June 2024'
   }
 ];
 
