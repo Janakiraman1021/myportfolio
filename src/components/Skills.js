@@ -3,22 +3,31 @@ import SkillCategory from './SkillCategory';
 
 const skillsData = {
   'Programming Languages': [
-    { name: 'JavaScript', level: 90 },
-    { name: 'Python', level: 85 },
-    { name: 'Solidity', level: 88 },
-    { name: 'C++', level: 75 }
+    { name: 'JavaScript', level: 95 },
+    { name: 'Python', level: 95 },
+    { name: 'Solidity', level: 90 },
+    { name: 'move', level: 90 },
+    { name: 'C++', level: 75 },
+    { name: 'C', level: 80 },
+    { name: 'Java', level: 85 },
+    { name: 'PHP', level: 75 },
+    { name: 'Rust', level: 65 }
   ],
   'Blockchain Development': [
     { name: 'Smart Contracts', level: 92 },
-    { name: 'Web3.js', level: 88 },
-    { name: 'Ethereum', level: 85 },
-    { name: 'DApp Development', level: 90 }
+    { name: 'Web3.js', level: 90 },
+    { name: 'Ethereum', level: 95 },
+    { name: 'DApp Development', level: 98 }
   ],
   'Frameworks & Tools': [
     { name: 'React.js', level: 92 },
+    { name: 'Mongo DB', level: 98 },
+    { name: 'Express js', level: 95 },
     { name: 'Node.js', level: 88 },
     { name: 'Hardhat', level: 85 },
-    { name: 'Truffle', level: 82 }
+    { name: 'Truffle', level: 82 },
+    { name: 'Remix ', level: 90 },
+    { name: 'VsCode', level: 90 }
   ]
 };
 

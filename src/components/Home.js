@@ -7,7 +7,7 @@ export default function Home() {
 
   useEffect(() => {
     // If you want to use the typewriter functionality with plain text update, you can use setInterval
-    const textArray = ['Full Stack Blockchain Developer', 'DApp Developer', 'Web3 Enthusiast'];
+    const textArray = ['Learner','Explorer','Dreamer','Achiever','Full Stack Blockchain Developer', 'DApp Developer', 'Web3 Enthusiast','Author','Speaker','Poet','Blogger','Innovator','Tech Enthusiast','Open Source Contributor','Mentor','Educator','Researcher','Leader','Volunteer','Freelancer'];
     let currentIndex = 0;
     let currentText = '';
     let typing = true;
