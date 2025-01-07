@@ -77,7 +77,7 @@ export default function Books() {
     <section id="books" className="py-20 bg-gradient-to-br from-primary-light/5 to-secondary-light/5 dark:from-primary-dark/5 dark:to-secondary-dark/5">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-          Published Books
+          My Books 
         </h2>
 
         {/* Main Book */}

@@ -41,8 +41,8 @@ function App() {
       <Education />
       <Skills />
       <Projects />
-      <Certifications />
       <Internships />
+      <Certifications />
       <Achievements />
       <Books />
       <Hobbies />

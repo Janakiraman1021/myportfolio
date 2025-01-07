@@ -75,6 +75,11 @@ export default function Contact() {
               </a>
             </div>
           </div>
+          <div className="text-center bg-gray-50 dark:bg-gray-800 py-4">
+            <p className="text-sm text-gray-600 dark:text-gray-400">
+              © {new Date().getFullYear()} Janakiraman. All rights reserved.
+            </p>
+          </div>
         </div>
       </div>
     </section>
