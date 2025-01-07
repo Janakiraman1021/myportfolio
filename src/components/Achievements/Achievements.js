@@ -16,8 +16,14 @@ const achievementsData = [
   },
   {
     title: 'Hackathon Winner',
-    organization: 'ETHGlobal',
+    organization: 'ByteVerse,DuHacks3.0,',
     date: 'August 2023',
+    description: 'First place for developing a decentralized blood donation management system.'
+  },
+  {
+    title: 'Unfold 2024',
+    organization: 'Participant of Unfold 2024',
+    date: 'December 2024',
     description: 'First place for developing a decentralized blood donation management system.'
   },
   {

@@ -62,12 +62,6 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-4 justify-center md:justify-start">
               <a
-                href="#contact"
-                className="px-8 py-3 bg-gradient-to-r from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark text-white rounded-lg hover:opacity-90 transition-all animate-float"
-              >
-                Get in Touch
-              </a>
-              <a
                 href="#projects"
                 className="px-8 py-3 border border-primary-light dark:border-primary-dark text-primary-light dark:text-primary-dark rounded-lg hover:bg-primary-light/5 dark:hover:bg-primary-dark/5 transition-all"
               >
