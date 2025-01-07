@@ -1,5 +1,5 @@
 import React from 'react';
-import { Book, ShoppingCart, Award } from 'lucide-react';
+import { ShoppingCart, Award } from 'lucide-react';
 
 const mainBook = {
   title: 'என் இதயத்தின் ஓசை',
