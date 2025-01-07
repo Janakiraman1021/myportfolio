@@ -1,10 +1,19 @@
 import React, { useState, useEffect } from 'react';
 import { Menu, X, Moon, Sun } from 'lucide-react';
 
-const navItems = [
-  'Home', 'About', 'Education', 'Skills', 'Projects',
-  'Certifications', 'Internships', 'Books','Achievements',  'Contact',
-];
+const navItems =[
+  'Home',
+  'About',
+  'Education',
+  'Skills',
+  'Projects',
+  'Internships',
+  'Certifications',
+  'Achievements',
+  'Books',
+  'Hobbies',
+  'Contact'
+]
 
 export default function Navbar({ darkMode, toggleDarkMode }) {
   const [isOpen, setIsOpen] = useState(false);
