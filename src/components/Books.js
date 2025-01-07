@@ -10,59 +10,66 @@ const mainBook = {
   isbn: '9789361759345',
   synopsis: 'A heartfelt collection of Tamil poetry exploring themes of love, technology, and modern life. The verses blend traditional Tamil poetic forms with contemporary perspectives on blockchain and digital innovation.',
   recognition: 'Featured in Tamil Literary Review 2023',
+  image: '/assets/books/sound-of-my-heart.jpeg', // Replace with actual image URL
   links: {
     amazon: 'https://www.amazon.in/dp/9361759345',
     googlePlay: 'https://play.google.com/store/books/details?id=CGkTEQAAQBAJ',
     flipkart: 'https://www.flipkart.com/product/p/itme?pid=9789361759345',
-    publisher: 'https://jecpublication.com/index.php/product/en-itayattin-ocai/'
-  }
+    publisher: 'https://jecpublication.com/index.php/product/en-itayattin-ocai/',
+  },
 };
 
 const coAuthoredBooks = [
   {
     title: 'மழலையும் நானும்',
+    image: '/assets/books/mazhalai.jpg', // Replace with actual image URL
     links: {
       amazon: 'https://amzn.to/3xPxoDA',
-      flipkart: 'https://fktr.in/DRn7oPD'
-    }
+      flipkart: 'https://fktr.in/DRn7oPD',
+    },
   },
   {
     title: 'விரும்பிய வரிகள்',
+    image: '/assets/books/virumbiya.jpg', // Replace with actual image URL
     links: {
       amazon: 'https://amzn.to/3TUTY5C',
-      flipkart: 'https://fktr.in/zotvX59'
-    }
+      flipkart: 'https://fktr.in/zotvX59',
+    },
   },
   {
     title: 'வினோத உலகம்',
+    image: '/assets/books/vinotha.jpg', // Replace with actual image URL
     links: {
       amazon: 'https://amzn.to/3ZRNPuL',
-      flipkart: 'https://fktr.in/zb5RsJ8'
-    }
+      flipkart: 'https://fktr.in/zb5RsJ8',
+    },
   },
   {
     title: 'எனது அபிமானி',
+    image: '/assets/books/abimani.jpg', // Replace with actual image URL
     links: {
       amazon: 'https://www.amazon.in/dp/9361752154',
       googlePlay: 'https://play.google.com/store/books/details?id=vTYZEQAAQBAJ',
-      website: 'https://jecpublication.com/index.php/product/enadhu-abimaani/'
-    }
+      website: 'https://jecpublication.com/index.php/product/enadhu-abimaani/',
+    },
   },
   {
     title: 'என் அழகிய தேவதை',
+    image: '/assets/books/mmy-beautiful-angel.jpg', // Replace with actual image URL
     links: {
       amazon: 'https://www.amazon.in/dp/9361751379',
       googlePlay: 'https://play.google.com/store/books/details?id=LTYYEQAAQBAJ',
-      website: 'https://jecpublication.com/index.php/product/en-azhagiya-dhevadhai/'
-    }
+      website: 'https://jecpublication.com/index.php/product/en-azhagiya-dhevadhai/',
+    },
   },
   {
     title: 'முகமரிய காதல்',
+    image: '/assets/books/faceless-love.jpg', // Replace with actual image URL
     links: {
       amazon: 'https://amzn.to/3LEopsn',
-      flipkart: 'https://fktr.in/91xf1kk'
-    }
-  }
+      flipkart: 'https://fktr.in/91xf1kk',
+    },
+  },
 ];
 
 export default function Books() {
@@ -79,11 +86,13 @@ export default function Books() {
             <div className="p-8">
               <div className="flex flex-col lg:flex-row gap-8">
                 <div className="lg:w-1/3">
-                  <div className="aspect-[3/4] bg-gradient-to-br from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark rounded-lg shadow-lg flex items-center justify-center p-6 animate-float">
-                    <Book className="w-24 h-24 text-white" />
-                  </div>
+                  <img
+                    src={mainBook.image}
+                    alt={mainBook.title}
+                    className="rounded-lg shadow-lg w-full object-cover"
+                  />
                 </div>
-                
+
                 <div className="lg:w-2/3">
                   <h3 className="text-2xl font-bold text-gray-900 dark:text-white mb-2">
                     {mainBook.title}
@@ -91,7 +100,6 @@ export default function Books() {
                   <p className="text-gray-600 dark:text-gray-400 mb-4">
                     ({mainBook.titleEnglish})
                   </p>
-                  
                   <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
                     <div>
                       <p className="text-gray-600 dark:text-gray-400">Author</p>
@@ -108,18 +116,15 @@ export default function Books() {
                       <p className="font-semibold text-gray-900 dark:text-white">{mainBook.isbn}</p>
                     </div>
                   </div>
-
                   <div className="mb-6">
                     <p className="text-gray-600 dark:text-gray-300">{mainBook.synopsis}</p>
                   </div>
-
                   <div className="mb-6">
                     <div className="flex items-center gap-2 text-blue-600 dark:text-blue-400">
                       <Award className="w-5 h-5" />
                       <p className="font-medium">{mainBook.recognition}</p>
                     </div>
                   </div>
-
                   <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
                     {Object.entries(mainBook.links).map(([platform, url]) => (
                       <a
@@ -150,11 +155,11 @@ export default function Books() {
           {coAuthoredBooks.map((book) => (
             <div key={book.title} className="bg-white dark:bg-gray-900 rounded-lg shadow-xl overflow-hidden transform hover:scale-105 transition-transform">
               <div className="p-6">
-                <div className="mb-6 flex justify-center">
-                  <div className="w-24 h-24 rounded-full bg-gradient-to-br from-primary-light to-secondary-light dark:from-primary-dark dark:to-secondary-dark p-6 animate-float">
-                    <Book className="w-full h-full text-white" />
-                  </div>
-                </div>
+                <img
+                  src={book.image}
+                  alt={book.title}
+                  className="rounded-lg shadow-lg mb-6 w-full object-cover"
+                />
                 <h3 className="text-xl font-bold text-center text-gray-900 dark:text-white mb-4">
                   {book.title}
                 </h3>
