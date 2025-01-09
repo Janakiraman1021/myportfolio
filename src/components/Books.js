@@ -10,7 +10,7 @@ const mainBook = {
   isbn: '9789361759345',
   synopsis: 'A heartfelt collection of Tamil poetry exploring themes of love, technology, and modern life. The verses blend traditional Tamil poetic forms with contemporary perspectives on blockchain and digital innovation.',
   recognition: 'Featured in Tamil Literary Review 2023',
-  image: '/assets/books/sound-of-my-heart.jpeg', // Replace with actual image URL
+  image: '/assets/books/sound-of-my-heart.jpeg', 
   links: {
     amazon: 'https://www.amazon.in/dp/9361759345',
     googlePlay: 'https://play.google.com/store/books/details?id=CGkTEQAAQBAJ',
@@ -22,7 +22,7 @@ const mainBook = {
 const coAuthoredBooks = [
   {
     title: 'மழலையும் நானும்',
-    image: '/assets/books/mazhalai.jpg', // Replace with actual image URL
+    image: '/assets/books/mazhalai.jpg', 
     links: {
       amazon: 'https://amzn.to/3xPxoDA',
       flipkart: 'https://fktr.in/DRn7oPD',
@@ -30,7 +30,7 @@ const coAuthoredBooks = [
   },
   {
     title: 'விரும்பிய வரிகள்',
-    image: '/assets/books/virumbiya.jpg', // Replace with actual image URL
+    image: '/assets/books/virumbiya.jpg', 
     links: {
       amazon: 'https://amzn.to/3TUTY5C',
       flipkart: 'https://fktr.in/zotvX59',
@@ -38,7 +38,7 @@ const coAuthoredBooks = [
   },
   {
     title: 'வினோத உலகம்',
-    image: '/assets/books/vinotha.jpg', // Replace with actual image URL
+    image: '/assets/books/vinotha.jpg', 
     links: {
       amazon: 'https://amzn.to/3ZRNPuL',
       flipkart: 'https://fktr.in/zb5RsJ8',
@@ -46,7 +46,7 @@ const coAuthoredBooks = [
   },
   {
     title: 'எனது அபிமானி',
-    image: '/assets/books/abimani.jpg', // Replace with actual image URL
+    image: '/assets/books/abimani.jpg', 
     links: {
       amazon: 'https://www.amazon.in/dp/9361752154',
       googlePlay: 'https://play.google.com/store/books/details?id=vTYZEQAAQBAJ',
@@ -55,7 +55,7 @@ const coAuthoredBooks = [
   },
   {
     title: 'என் அழகிய தேவதை',
-    image: '/assets/books/mmy-beautiful-angel.jpg', // Replace with actual image URL
+    image: '/assets/books/mmy-beautiful-angel.jpg', 
     links: {
       amazon: 'https://www.amazon.in/dp/9361751379',
       googlePlay: 'https://play.google.com/store/books/details?id=LTYYEQAAQBAJ',
@@ -64,7 +64,7 @@ const coAuthoredBooks = [
   },
   {
     title: 'முகமரிய காதல்',
-    image: '/assets/books/faceless-love.jpg', // Replace with actual image URL
+    image: '/assets/books/faceless-love.jpg', 
     links: {
       amazon: 'https://amzn.to/3LEopsn',
       flipkart: 'https://fktr.in/91xf1kk',

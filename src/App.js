@@ -12,6 +12,7 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import Contact from './components/Contact';
 import Hobbies from './components/Hobbies';
 import Books from './components/Books';
+import Footer from './components/Footer';
 
 
 function App() {
@@ -47,6 +48,7 @@ function App() {
       <Books />
       <Hobbies />
       <Contact />
+      <Footer />
     </div>
   );
 }
