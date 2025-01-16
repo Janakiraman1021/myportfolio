@@ -1,49 +1,59 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import InternshipCard from './InternshipCard';
-
-const internshipsData = [
-  {
-    company: 'SecureDApp',
-    role: 'Software Developer Intern',
-    period: 'June 2023 - August 2023',
-    responsibilities: [
-      'Developed secure DApps using Solidity and Web3.js',
-      'Implemented smart contracts for various blockchain applications',
-      'Collaborated with the team on Web3 integrations'
-    ]
-  },
-  {
-    company: 'McZeal',
-    role: 'ML Developer',
-    period: 'March 2023 - May 2023',
-    responsibilities: [
-      'Designed ML models for predictive analytics',
-      'Implemented automation solutions using Python',
-      'Optimized existing ML pipelines for better performance'
-    ]
-  },
-  {
-    company: 'Techoctanet',
-    role: 'Web Development Intern',
-    period: 'December 2022 - February 2023',
-    responsibilities: [
-      'Built responsive web applications using modern frameworks',
-      'Implemented UI/UX improvements',
-      'Collaborated with the design team on new features'
-    ]
-  }
-];
+import { Loader, AlertCircle } from 'lucide-react';
 
 export default function Internships() {
+  const [internships, setInternships] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchInternships = async () => {
+      try {
+        const response = await axios.get('https://port-backend-onv7.onrender.com/api/internships');
+        if (response.data.success) {
+          setInternships(response.data.data);
+        }
+      } catch (err) {
+        setError('Failed to fetch internships');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchInternships();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-[60vh]">
+        <Loader className="w-12 h-12 text-blue-500 animate-spin" />
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex flex-col items-center justify-center min-h-[60vh] px-4">
+        <AlertCircle className="w-12 h-12 text-red-500 mb-4" />
+        <p className="text-red-500 text-center">{error}</p>
+      </div>
+    );
+  }
+
   return (
-    <section id="internships" className="py-20">
+    <section className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
-          Internships
+          Internship Experience
         </h2>
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
-          {internshipsData.map((internship) => (
-            <InternshipCard key={internship.company} {...internship} />
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          {internships.map((internship) => (
+            <InternshipCard
+              key={internship._id}
+              {...internship}
+            />
           ))}
         </div>
       </div>

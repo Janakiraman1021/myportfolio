@@ -1,17 +1,19 @@
 import React, { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
+import axios from 'axios';
 
 export default function ProjectsForm() {
-  const [projects, setProjects] = useState([
-    {
-      title: '',
-      description: '',
-      technologies: [''],
-      githubUrl: '',
-      liveUrl: '',
-      image: ''
-    }
-  ]);
+  const [projects, setProjects] = useState([{
+    title: '',
+    description: '',
+    technologies: [''],
+    githubUrl: '',
+    liveUrl: '',
+    image: ''
+  }]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handleAdd = () => {
     setProjects([
@@ -41,14 +43,60 @@ export default function ProjectsForm() {
     setProjects(newProjects);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(projects);
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      // Validate required fields
+      if (!projects[0].title || !projects[0].description || !projects[0].technologies.length) {
+        throw new Error('Title, description and technologies are required');
+      }
+
+      const response = await axios.post('https://port-backend-onv7.onrender.com/api/projects', {
+        title: projects[0].title.trim(),
+        description: projects[0].description.trim(),
+        technologies: projects[0].technologies.filter(tech => tech.trim()),
+        githubUrl: projects[0].githubUrl.trim(),
+        liveUrl: projects[0].liveUrl.trim(),
+        image: projects[0].image.trim()
+      });
+
+      if (response.data.success) {
+        setSuccess(true);
+        // Reset form
+        setProjects([{
+          title: '',
+          description: '',
+          technologies: [''],
+          githubUrl: '',
+          liveUrl: '',
+          image: ''
+        }]);
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-4 text-red-600 bg-red-100 rounded-lg">
+          {error}
+        </div>
+      )}
+      
+      {success && (
+        <div className="p-4 text-green-600 bg-green-100 rounded-lg">
+          Project saved successfully!
+        </div>
+      )}
+
       {projects.map((project, index) => (
         <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
           <div className="space-y-4">
@@ -144,9 +192,10 @@ export default function ProjectsForm() {
         </button>
         <button
           type="submit"
-          className="px-6 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity"
+          disabled={loading}
+          className="px-6 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
         >
-          Save Changes
+          {loading ? 'Saving...' : 'Save Changes'}
         </button>
       </div>
     </form>

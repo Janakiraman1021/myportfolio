@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Plus, Trash2 } from 'lucide-react';
+import axios from 'axios';
 
 export default function AchievementsForm() {
   const [achievements, setAchievements] = useState([
@@ -10,6 +11,8 @@ export default function AchievementsForm() {
       description: ''
     }
   ]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
 
   const handleAdd = () => {
     setAchievements([...achievements, {
@@ -30,13 +33,38 @@ export default function AchievementsForm() {
     setAchievements(newAchievements);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(achievements);
+    setLoading(true);
+    setError(null);
+
+    try {
+      const response = await axios.post('https://port-backend-onv7.onrender.com/api/achievements', {
+        achievements
+      });
+
+      if (response.data.success) {
+        // Reset form after successful submission
+        setAchievements([{
+          title: '',
+          organization: '',
+          date: '',
+          description: ''
+        }]);
+        alert('Achievements added successfully!');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || 'Failed to add achievements');
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="text-red-500 bg-red-100 p-3 rounded">{error}</div>
+      )}
       {achievements.map((achievement, index) => (
         <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
           <div className="space-y-4">
@@ -50,6 +78,7 @@ export default function AchievementsForm() {
                   value={achievement.title}
                   onChange={(e) => handleChange(index, 'title', e.target.value)}
                   className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+                  required
                 />
               </div>
               <div>
@@ -111,9 +140,10 @@ export default function AchievementsForm() {
         </button>
         <button
           type="submit"
-          className="px-6 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity"
+          disabled={loading}
+          className="px-6 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
         >
-          Save Changes
+          {loading ? 'Saving...' : 'Save Achievements'}
         </button>
       </div>
     </form>

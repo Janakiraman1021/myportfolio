@@ -1,42 +1,54 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import ProjectCard from './ProjectCard';
 
-const projectsData = [
-  {
-    title: 'Virtual Controllers',
-    description: 'A decentralized platform for managing virtual game controllers with blockchain integration.',
-    technologies: ['React', 'Solidity', 'Web3.js', 'Node.js'],
-    githubUrl: '',
-    liveUrl: '',
-    image: 'https://images.unsplash.com/photo-1550745165-9bc0b252726f?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    title: 'KYC 3.0',
-    description: 'Blockchain-based KYC verification system for secure identity management.',
-    technologies: ['Ethereum', 'React', 'Node.js', 'IPFS'],
-    githubUrl: '',
-    image: 'https://images.unsplash.com/photo-1639762681485-074b7f938ba0?auto=format&fit=crop&w=800&q=80'
-  },
-  {
-    title: 'Blood Bridge',
-    description: 'Decentralized blood donation management system using blockchain.',
-    technologies: ['Solidity', 'React', 'Hardhat', 'TypeScript'],
-    githubUrl: '',
-    liveUrl: '',
-    image: 'https://images.unsplash.com/photo-1615461066841-6116e61058f4?auto=format&fit=crop&w=800&q=80'
-  }
-];
-
 export default function Projects() {
+  const [projects, setProjects] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+
+  useEffect(() => {
+    const fetchProjects = async () => {
+      try {
+        const response = await axios.get('https://port-backend-onv7.onrender.com/api/projects');
+        if (response.data.success) {
+          setProjects(response.data.data);
+        }
+      } catch (err) {
+        setError('Failed to fetch projects');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchProjects();
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="animate-spin rounded-full h-12 w-12 border-t-2 border-b-2 border-blue-500"></div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return (
+      <div className="flex justify-center items-center min-h-screen">
+        <div className="text-red-500">{error}</div>
+      </div>
+    );
+  }
+
   return (
-    <section id="projects" className="py-20">
+    <section id="projects" className="py-20 bg-gray-50 dark:bg-gray-800">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-3xl font-bold text-center text-gray-900 dark:text-white mb-12">
           Projects
         </h2>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projectsData.map((project) => (
-            <ProjectCard key={project.title} {...project} />
+          {projects.map((project) => (
+            <ProjectCard key={project._id} {...project} />
           ))}
         </div>
       </div>
