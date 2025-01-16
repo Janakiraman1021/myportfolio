@@ -1,15 +1,17 @@
 import React, { useState } from 'react';
-import { Plus, Trash2 } from 'lucide-react';
+import { Plus, Trash2, CheckCircle } from 'lucide-react';
+import axios from 'axios';
 
 export default function CertificationsForm() {
-  const [certifications, setCertifications] = useState([
-    {
-      title: '',
-      issuer: '',
-      date: '',
-      credentialUrl: ''
-    }
-  ]);
+  const [certifications, setCertifications] = useState([{
+    title: '',
+    issuer: '',
+    date: '',
+    credentialUrl: ''
+  }]);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState(null);
+  const [success, setSuccess] = useState(false);
 
   const handleAdd = () => {
     setCertifications([...certifications, {
@@ -30,14 +32,62 @@ export default function CertificationsForm() {
     setCertifications(newCertifications);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    // Handle form submission
-    console.log(certifications);
+    setLoading(true);
+    setError(null);
+    setSuccess(false);
+
+    try {
+      // Validate required fields
+      if (!certifications[0].title || !certifications[0].issuer || !certifications[0].date) {
+        throw new Error('Title, issuer and date are required');
+      }
+
+      const response = await axios.post(
+        'https://port-backend-onv7.onrender.com/api/certifications',
+        {
+          title: certifications[0].title.trim(),
+          issuer: certifications[0].issuer.trim(),
+          date: certifications[0].date.trim(),
+          credentialUrl: certifications[0].credentialUrl.trim()
+        }
+      );
+
+      if (response.data.success) {
+        setSuccess(true);
+        // Reset form
+        setCertifications([{
+          title: '',
+          issuer: '',
+          date: '',
+          credentialUrl: ''
+        }]);
+        // Show alert
+        alert('Certificate uploaded successfully!');
+      }
+    } catch (err) {
+      setError(err.response?.data?.message || err.message);
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
     <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-4 text-red-600 bg-red-100 rounded-lg">
+          {error}
+        </div>
+      )}
+      
+      {success && (
+        <div className="p-4 bg-green-100 rounded-lg flex items-center gap-2">
+          <CheckCircle className="w-5 h-5 text-green-500" />
+          <span className="text-green-700">Certificate uploaded successfully!</span>
+        </div>
+      )}
+
       {certifications.map((certification, index) => (
         <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -103,19 +153,19 @@ export default function CertificationsForm() {
         <button
           type="button"
           onClick={handleAdd}
-          className="flex items-center gap-2 text-primary-light dark:text-primary-dark hover:text-primary-light/80 dark:hover:text-primary-dark/80"
+          className="flex items-center gap-2 text-primary-light dark:text-primary-dark"
         >
           <Plus className="w-4 h-4" />
           Add Certification
         </button>
         <button
           type="submit"
-          className="px-6 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity"
+          disabled={loading}
+          className="px-6 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 disabled:opacity-50"
         >
-          Save Changes
+          {loading ? 'Saving...' : 'Save Changes'}
         </button>
       </div>
     </form>
   );
 }
-    

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import SkillCategory from './SkillCategory';
+
 
 export default function Skills() {
   const [skills, setSkills] = useState({});

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom'; // Import Link and useLocation
+import { Link } from 'react-router-dom'; // Import Link and useLocation
 import { Menu, X, Moon, Sun, LogIn } from 'lucide-react';
 
 const navItems = [
@@ -19,7 +19,7 @@ const navItems = [
 export default function Navbar({ darkMode, toggleDarkMode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
-  const location = useLocation(); // Hook to get current path
+  
 
   useEffect(() => {
     const handleScroll = () => {
