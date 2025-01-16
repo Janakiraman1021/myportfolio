@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Moon, Sun } from 'lucide-react';
+import { Link, useLocation } from 'react-router-dom'; // Import Link and useLocation
+import { Menu, X, Moon, Sun, LogIn } from 'lucide-react';
 
-const navItems =[
+const navItems = [
   'Home',
   'About',
   'Education',
@@ -13,11 +14,12 @@ const navItems =[
   'Books',
   'Hobbies',
   'Contact'
-]
+];
 
 export default function Navbar({ darkMode, toggleDarkMode }) {
   const [isOpen, setIsOpen] = useState(false);
   const [activeSection, setActiveSection] = useState('Home');
+  const location = useLocation(); // Hook to get current path
 
   useEffect(() => {
     const handleScroll = () => {
@@ -43,7 +45,12 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex items-center justify-between h-16">
           <div className="flex-shrink-0">
-            <span className="text-xl font-bold text-gray-800 dark:text-white">JR</span>
+            <Link
+              to="/"
+              className="text-xl font-bold text-gray-800 dark:text-white cursor-pointer"
+            >
+              JR
+            </Link>
           </div>
 
           <div className="hidden md:block">
@@ -65,11 +72,23 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
           </div>
 
           <div className="flex items-center space-x-4">
+            <Link
+              to="/login"
+              className="flex items-center space-x-1 text-gray-600 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+            >
+              <LogIn className="w-5 h-5" />
+              <span className="hidden sm:inline">Sign In</span>
+            </Link>
+
             <button
               onClick={toggleDarkMode}
               className="p-2 rounded-lg hover:bg-gray-100 dark:hover:bg-gray-800 transition-colors"
             >
-              {darkMode ? <Sun className="w-5 h-5 text-gray-300" /> : <Moon className="w-5 h-5 text-gray-600" />}
+              {darkMode ? (
+                <Sun className="w-5 h-5 text-gray-300" />
+              ) : (
+                <Moon className="w-5 h-5 text-gray-600" />
+              )}
             </button>
 
             <div className="md:hidden">
@@ -88,6 +107,7 @@ export default function Navbar({ darkMode, toggleDarkMode }) {
         </div>
       </div>
 
+      {/* Mobile menu */}
       {isOpen && (
         <div className="md:hidden">
           <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">

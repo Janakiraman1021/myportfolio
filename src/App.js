@@ -5,14 +5,17 @@ import About from './components/About';
 import Education from './components/Education';
 import Skills from './components/Skills';
 import Projects from './components/Projects/Projects';
+import Books from './components/Books';
 import Certifications from './components/Certifications/Certifications';
 import Internships from './components/Internships/Internships';
 import Achievements from './components/Achievements/Achievements';
-import '@fortawesome/fontawesome-free/css/all.min.css';
-import Contact from './components/Contact';
 import Hobbies from './components/Hobbies';
-import Books from './components/Books';
+import Contact from './components/Contact';
 import Footer from './components/Footer';
+import { Routes, Route } from 'react-router-dom';
+import Login from './components/auth/Login';
+import Dashboard from './components/dashboard/Dashboard';
+import ProtectedRoute from './components/auth/ProtectedRoute';
 
 
 function App() {
@@ -37,21 +40,56 @@ function App() {
   return (
     <div className={`min-h-screen bg-white dark:bg-gray-900 transition-colors`}>
       <Navbar darkMode={darkMode} toggleDarkMode={toggleDarkMode} />
-      <Home />
-      <About />
-      <Education />
-      <Skills />
-      <Projects />
-      <Internships />
-      <Certifications />
-      <Achievements />
-      <Books />
-      <Hobbies />
-      <Contact />
+
+      <Routes>
+        <Route path="/login" element={<Login/>} />
+        <Route 
+          path="/dashboard" 
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          } 
+        />
+      </Routes>
+      <main>
+        <section id="home">
+          <Home />
+        </section>
+        <section id="about">
+          <About />
+        </section>
+        <section id="education">
+          <Education />
+        </section>
+        <section id="skills">
+          <Skills />
+        </section>
+        <section id="projects">
+          <Projects />
+        </section>
+        <section id="books">
+          <Books />
+        </section>
+        <section id="certifications">
+          <Certifications />
+        </section>
+        <section id="internships">
+          <Internships />
+        </section>
+        <section id="achievements">
+          <Achievements />
+        </section>
+        <section id="hobbies">
+          <Hobbies />
+        </section>
+        <section id="contact">
+          <Contact />
+        </section>
+      </main>
       <Footer />
     </div>
   );
 }
 
 export default App;
-
