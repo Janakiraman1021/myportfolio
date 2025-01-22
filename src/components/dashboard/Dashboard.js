@@ -32,6 +32,12 @@ export default function Dashboard() {
         return <CertificationsForm />;
       case 'Achievements':
         return <AchievementsForm />;
+      case 'Books':
+        return <BooksForm />;
+      case 'Hobbies':
+        return <HobbiesForm />;
+      case 'Contact':
+        return <ContactForm />;
       default:
         return null;
     }
