@@ -5,17 +5,22 @@ export function useIntersectionObserver(options = {}) {
   const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
+    // Store the current element in a variable to use in cleanup
+    const currentElement = elementRef.current;
+    
+    if (!currentElement) return;
+
     const observer = new IntersectionObserver(([entry]) => {
       setIsVisible(entry.isIntersecting);
-    }, { threshold: 0.1, ...options });
+    }, options);
 
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
+    // Use the stored reference
+    observer.observe(currentElement);
 
+    // Cleanup using the same stored reference
     return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
+      if (currentElement) {
+        observer.unobserve(currentElement);
       }
     };
   }, [options]);

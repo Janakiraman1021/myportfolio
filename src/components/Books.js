@@ -69,6 +69,13 @@ const coAuthoredBooks = [
       amazon: 'https://amzn.to/3LEopsn',
       flipkart: 'https://fktr.in/91xf1kk',
     },
+  },{
+    title: 'பாரதி! யாரா?!',
+    image: '/assets/books/barathi.png', 
+    links: {
+      amazon: 'https://amzn.to/3CQtRaH',
+      flipkart: 'https://fktr.in/4iItIOx',
+    },
   },
 ];
 

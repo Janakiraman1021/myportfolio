@@ -1,0 +1,16 @@
+.home-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.typewriter {
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.cursor {
+  display: inline-block;
+  margin-left: 2px;
+}

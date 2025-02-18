@@ -1,6 +1,8 @@
-import React, { useState, useEffect } from 'react';
-import { Plus, Trash2, Edit2 } from 'lucide-react';
+import React, { useState } from 'react';
+import { Plus, Trash2 } from 'lucide-react';
 import axios from 'axios';
+
+const API_BASE_URL = 'http://localhost:5000/api/skills';
 
 export default function SkillsForm() {
   const [skills, setSkills] = useState([
@@ -9,28 +11,12 @@ export default function SkillsForm() {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
-  const [editMode, setEditMode] = useState(false);
-  const [existingSkills, setExistingSkills] = useState([]);
-  const [editingSkill, setEditingSkill] = useState(null);
 
   const categories = [
     'Programming Languages',
     'Blockchain Development',
     'Frameworks & Tools'
   ];
-
-  // Fetch existing skills
-  useEffect(() => {
-    const fetchSkills = async () => {
-      try {
-        const response = await axios.get('https://port-backend-onv7.onrender.com/api/skills');
-        setExistingSkills(response.data.data);
-      } catch (err) {
-        setError('Failed to fetch skills');
-      }
-    };
-    fetchSkills();
-  }, [success]);
 
   const handleAdd = () => {
     setSkills([...skills, { name: '', level: 0, category: 'Programming Languages' }]);
@@ -40,169 +26,136 @@ export default function SkillsForm() {
     setSkills(skills.filter((_, i) => i !== index));
   };
 
-  const handleEdit = (skill) => {
-    setEditMode(true);
-    setEditingSkill(skill);
-    setSkills([skill]);
-  };
-
-  const handleDelete = async (skillId) => {
-    try {
-      await axios.delete(`https://port-backend-onv7.onrender.com/api/skills/${skillId}`);
-      setExistingSkills(existingSkills.filter(skill => skill._id !== skillId));
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 3000);
-    } catch (err) {
-      setError('Failed to delete skill');
-    }
+  const handleChange = (index, field, value) => {
+    const newSkills = [...skills];
+    newSkills[index][field] = value;
+    setSkills(newSkills);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(null);
-    
+    setSuccess(false);
+
     try {
-      if (editMode) {
-        await axios.put(`https://port-backend-onv7.onrender.com/api/skills/${editingSkill._id}`, skills[0]);
-      } else {
-        await axios.post('https://port-backend-onv7.onrender.com/api/skills', skills);
+      // Validate fields
+      if (!skills[0].name || !skills[0].level || !skills[0].category) {
+        throw new Error('All fields are required');
       }
-      
-      setSuccess(true);
-      setTimeout(() => setSuccess(false), 3000);
-      
-      if (editMode) {
-        setEditMode(false);
-        setEditingSkill(null);
+
+      const response = await axios.post(
+        API_BASE_URL,
+        {
+          name: skills[0].name.trim(),
+          level: parseInt(skills[0].level),
+          category: skills[0].category
+        }
+      );
+
+      if (response.data.success) {
+        setSuccess(true);
+        // Reset form
+        setSkills([{ 
+          name: '', 
+          level: 0, 
+          category: 'Programming Languages' 
+        }]);
       }
-      
-      setSkills([{ name: '', level: 0, category: 'Programming Languages' }]);
-      
-      // Refresh existing skills
-      const response = await axios.get('https://port-backend-onv7.onrender.com/api/skills');
-      setExistingSkills(response.data.data);
     } catch (err) {
-      setError(err.response?.data?.message || 'Something went wrong');
+      setError(err.response?.data?.message || err.message);
+    } finally {
+      setLoading(false);
     }
-    setLoading(false);
   };
 
   return (
-    <div className="space-y-6">
-      <form onSubmit={handleSubmit} className="space-y-4">
-        {skills.map((skill, index) => (
-          <div key={index} className="flex items-center space-x-4">
-            <input
-              type="text"
-              placeholder="Skill name"
-              value={skill.name}
-              onChange={(e) => {
-                const updated = [...skills];
-                updated[index].name = e.target.value;
-                setSkills(updated);
-              }}
-              className="flex-1 px-4 py-2 border rounded-lg"
-            />
-            <input
-              type="number"
-              min="0"
-              max="100"
-              value={skill.level}
-              onChange={(e) => {
-                const updated = [...skills];
-                updated[index].level = parseInt(e.target.value);
-                setSkills(updated);
-              }}
-              className="w-20 px-4 py-2 border rounded-lg"
-            />
-            <select
-              value={skill.category}
-              onChange={(e) => {
-                const updated = [...skills];
-                updated[index].category = e.target.value;
-                setSkills(updated);
-              }}
-              className="px-4 py-2 border rounded-lg"
-            >
-              {categories.map(category => (
-                <option key={category} value={category}>
-                  {category}
-                </option>
-              ))}
-            </select>
-            {!editMode && (
-              <button
-                type="button"
-                onClick={() => handleRemove(index)}
-                className="text-red-500"
-              >
-                <Trash2 className="w-5 h-5" />
-              </button>
-            )}
-          </div>
-        ))}
-        
-        {!editMode && (
-          <button
-            type="button"
-            onClick={handleAdd}
-            className="flex items-center text-primary-light"
-          >
-            <Plus className="w-5 h-5 mr-1" />
-            Add Skill
-          </button>
-        )}
+    <form onSubmit={handleSubmit} className="space-y-6">
+      {error && (
+        <div className="p-4 text-red-600 bg-red-100 rounded-lg">
+          {error}
+        </div>
+      )}
+      
+      {success && (
+        <div className="p-4 text-green-600 bg-green-100 rounded-lg">
+          Skill saved successfully!
+        </div>
+      )}
 
+      {skills.map((skill, index) => (
+        <div key={index} className="p-4 border border-gray-200 dark:border-gray-700 rounded-lg">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Skill Name
+              </label>
+              <input
+                type="text"
+                value={skill.name}
+                onChange={(e) => handleChange(index, 'name', e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Proficiency Level (0-100)
+              </label>
+              <input
+                type="number"
+                min="0"
+                max="100"
+                value={skill.level}
+                onChange={(e) => handleChange(index, 'level', parseInt(e.target.value))}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              />
+            </div>
+            <div>
+              <label className="block text-sm font-medium text-gray-700 dark:text-gray-300 mb-1">
+                Category
+              </label>
+              <select
+                value={skill.category}
+                onChange={(e) => handleChange(index, 'category', e.target.value)}
+                className="w-full px-4 py-2 border border-gray-300 dark:border-gray-700 rounded-lg focus:ring-2 focus:ring-primary-light dark:focus:ring-primary-dark bg-white dark:bg-gray-800 text-gray-900 dark:text-white"
+              >
+                {categories.map((category) => (
+                  <option key={category} value={category}>
+                    {category}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          {skills.length > 1 && (
+            <button
+              type="button"
+              onClick={() => handleRemove(index)}
+              className="mt-4 text-red-600 dark:text-red-400 hover:text-red-700 dark:hover:text-red-300 flex items-center gap-1"
+            >
+              <Trash2 className="w-4 h-4" />
+              Remove
+            </button>
+          )}
+        </div>
+      ))}
+      <div className="flex justify-between">
+        <button
+          type="button"
+          onClick={handleAdd}
+          className="flex items-center gap-2 text-primary-light dark:text-primary-dark hover:text-primary-light/80 dark:hover:text-primary-dark/80"
+        >
+          <Plus className="w-4 h-4" />
+          Add Skill
+        </button>
         <button
           type="submit"
           disabled={loading}
-          className="px-6 py-2 bg-primary-light text-white rounded-lg"
+          className="px-6 py-2 bg-primary-light dark:bg-primary-dark text-white rounded-lg hover:opacity-90 transition-opacity disabled:opacity-50"
         >
-          {loading ? 'Saving...' : editMode ? 'Update Skill' : 'Save Skills'}
+          {loading ? 'Saving...' : 'Save Changes'}
         </button>
-      </form>
-
-      {/* Existing Skills List */}
-      {existingSkills.length > 0 && (
-        <div className="mt-8">
-          <h3 className="text-lg font-medium mb-4">Existing Skills</h3>
-          <div className="space-y-2">
-            {existingSkills.map((skill) => (
-              <div key={skill._id} className="flex items-center justify-between p-3 border rounded-lg">
-                <div>
-                  <span className="font-medium">{skill.name}</span>
-                  <span className="ml-2 text-gray-500">({skill.category})</span>
-                  <span className="ml-2">{skill.level}%</span>
-                </div>
-                <div className="flex space-x-2">
-                  <button
-                    onClick={() => handleEdit(skill)}
-                    className="text-primary-light"
-                  >
-                    <Edit2 className="w-5 h-5" />
-                  </button>
-                  <button
-                    onClick={() => handleDelete(skill._id)}
-                    className="text-red-500"
-                  >
-                    <Trash2 className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
-
-      {error && (
-        <div className="text-red-500 mt-4">{error}</div>
-      )}
-      {success && (
-        <div className="text-green-500 mt-4">
-          Skills {editMode ? 'updated' : 'saved'} successfully!
-        </div>
-      )}
-    </div>
+      </div>
+    </form>
   );
 }
